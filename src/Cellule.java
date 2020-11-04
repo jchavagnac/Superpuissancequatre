@@ -14,7 +14,7 @@ public class Cellule {
     boolean desintegrateur;
 
     public Cellule(){
-        jetonCourant=null;
+        jetonCourant=null;// on cree une cellule vide
     }
 
     public boolean affecterJeton(Jeton unJeton){
@@ -30,7 +30,7 @@ public class Cellule {
 }
 
     public Jeton recupererJeton(Jeton jetonCourant){
-        return jetonCourant;
+        return jetonCourant; // renvoyé le jeton qui a été ou non mit
     }
 
 

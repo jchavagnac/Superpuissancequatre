@@ -1,3 +1,6 @@
+
+import java.util.Arrays;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -58,15 +61,10 @@ public class Grille {
     }
 }
     public void afficherGrilleSurConsole(){
-        System.out.println(Cellules);
+        System.out.println(Arrays.toString(Cellules));
 }
     public boolean celluleOccupee(int i, int j){
-        if (Cellules[i][j]!=null){
-            return true;
-    }
-        else {
-            return false;
-    }
+        return Cellules[i][j]!=null; // renvoyer
 
     }
 
@@ -79,23 +77,23 @@ public class Grille {
     public boolean etreGagnantePourJoueur(Joueur unJoueur){
         String couleurTest=unJoueur.couleur;
         for (int i=0;i<6;i++){
-            for (int j=0;i<7;j++){
+            for (int j=0;j<7;j++){
                 int ligne=i;
                 int colonne=j;
 
-                for (i=ligne;i<ligne+4;i++){
-                    if (Cellules[i][j].jetonCourant.couleur==couleurTest){
+                for (i=ligne;i<ligne+3&&i<6;i++){// pour tester les lignes 
+                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
                         return true;
                     }
                 }
 
-                for (j=colonne;j<colonne+4;j++){
-                    if (Cellules[i][j].jetonCourant.couleur==couleurTest){
+                for (j=colonne;j<colonne+3&&j<7;j++){// pour tester les colonnes
+                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
                         return true;
                     }
 
                 for (i=ligne;i<ligne+4;i++){
-                         if (Cellules[i][j].jetonCourant.couleur)
+                         if (Cellules[i][j].jetonCourant.couleur);
                      }
 
                 } 
@@ -103,6 +101,6 @@ public class Grille {
     }return false;
     }
     
-    ezfgdqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+    
 }
 
