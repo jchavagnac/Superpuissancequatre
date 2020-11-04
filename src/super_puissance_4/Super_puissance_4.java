@@ -15,6 +15,9 @@ public class Super_puissance_4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Bienvenue dans le jeu Super Puissance 4 !");
+        Partie premierePartie=new Partie();
+        premierePartie.debuterPartie();
         // TODO code application logic here
     }
     

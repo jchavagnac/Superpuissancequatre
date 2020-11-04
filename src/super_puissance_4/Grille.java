@@ -1,4 +1,8 @@
+package super_puissance_4;
 
+
+import super_puissance_4.Jeton;
+import super_puissance_4.Joueur;
 import java.util.Arrays;
 
 /*
@@ -18,9 +22,9 @@ public class Grille {
 
  
 
-    Cellule[][] Cellules=new Cellule[6][7];
+    Cellule[][] Cellules=new Cellule[6][7]; // tableau de 0
 
-    public Grille(){
+    public Grille(){// constructeur grille qui crée les cellules
         for (int i=0;i<6;i++){
             for (int j=0;j<7;j++){
                 Cellules[i][j]=new Cellule();
