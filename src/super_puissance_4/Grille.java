@@ -78,7 +78,7 @@ public class Grille {
         return couleur_a_retourner;
     }
 
-    public boolean etreGagnantePourJoueur(Joueur unJoueur){
+    public boolean etreGagnantePourJoueur(Joueur unJoueur){// on veut determiner qui est le gagnant
         String couleurTest=unJoueur.couleur;
         for (int i=0;i<6;i++){
             for (int j=0;j<7;j++){
@@ -86,7 +86,8 @@ public class Grille {
                 int colonne=j;
 
                 for (i=ligne;i<ligne+3&&i<6;i++){// pour tester les lignes 
-                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
+                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){// test si la couleur est la meme que celle dans la cellule
+                        // ligne toute la ligne
                         return true;
                     }
                 }
@@ -96,8 +97,10 @@ public class Grille {
                         return true;
                     }
 
-                for (i=ligne;i<ligne+4;i++){
+                for (i=ligne;i<ligne+4;i++){ // tester sur la diagonale 
+                    
                          if (Cellules[i][j].jetonCourant.couleur);
+                         return  true;
                      }
 
                 } 
