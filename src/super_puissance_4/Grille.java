@@ -1,8 +1,7 @@
 package super_puissance_4;
 
 
-import super_puissance_4.Jeton;
-import super_puissance_4.Joueur;
+
 import java.util.Arrays;
 
 /*
@@ -97,7 +96,7 @@ public class Grille {
                         return true;
                     }
 
-                for (i=ligne&&j=colonne;i<ligne+3&&j<colonne+3;i++&&j++){ // tester sur la diagonale 
+                for (i=ligne,j=colonne;i<ligne+3 && j<colonne+3;i++,j++){ // tester sur la diagonale 
                     if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
                         return true;
                      }
@@ -105,9 +104,10 @@ public class Grille {
                 } 
                 }
     }return false;
-    }
+    }return false;
     
     
+}
 }
 //salut les collegues
 
