@@ -30,7 +30,11 @@ public class Grille {
             }
         }
     }
-
+public boolean colonneRemplie(int indicecolonne){
+    
+    return (Cellules[5][indicecolonne].recupererJeton() != null);
+    
+}
     public boolean ajouterJetonDansColonne(Jeton jeton,int colonne){
         for (int i=1;i<6;i++){
             if (Cellules[5-i][colonne]==null){
@@ -63,17 +67,17 @@ public class Grille {
             }
     }
 }
-    public void afficherGrilleSurConsole(){
+    public void afficherGrilleSurConsole(){// afficher la grille
         System.out.println(Arrays.toString(Cellules));
 }
     public boolean celluleOccupee(int i, int j){
-        return Cellules[i][j]!=null; // renvoyer
+        return Cellules[i][j]!=null; // renvoyer la cellule
 
     }
 
-    public String lireCouleurDuJeton(int i, int j){
+    public String lireCouleurDuJeton(int i, int j){// regarder quelle est la couleur du jeton
         String couleur_a_retourner;
-        couleur_a_retourner=Cellules[i][j].jetonCourant.couleur;
+        couleur_a_retourner=Cellules[i][j].lirecouleurjeton();
         return couleur_a_retourner;
     }
 
@@ -85,19 +89,19 @@ public class Grille {
                 int colonne=j;
 
                 for (i=ligne;i<ligne+3&&i<6;i++){// pour tester les lignes 
-                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){// test si la couleur est la meme que celle dans la cellule
+                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){// test si la couleur est la meme que celle dans la cellule
                         // ligne toute la ligne
                         return true;
                     }
                 }
 
                 for (j=colonne;j<colonne+3&&j<7;j++){// pour tester les colonnes
-                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
+                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
                         return true;
                     }
 
-                for (i=ligne,j=colonne;i<ligne+3 && j<colonne+3;i++,j++){ // tester sur la diagonale 
-                    if (Cellules[i][j].jetonCourant.couleur.equals(couleurTest)){
+                for (i=ligne,j=colonne;i<ligne+3&&i<6 && j<colonne+3&&j<7;i++,j++){ // tester sur la diagonale 
+                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
                         return true;
                      }
 
@@ -109,5 +113,5 @@ public class Grille {
     
 }
 }
-//salut les collegues
+
 

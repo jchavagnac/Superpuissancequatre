@@ -34,9 +34,15 @@ public class Cellule {
        }
 }
 
-    public Jeton recupererJeton(Jeton jetonCourant){
-        return jetonCourant; // renvoyé le jeton qui a été ou non mit
+    public Jeton recupererJeton(){
+        Jeton unJeton= jetonCourant;
+        jetonCourant=null;
+        return unJeton;// renvoyé le jeton qui a été ou non placer
     }
+ public String lirecouleurjeton(){
+     return jetonCourant.couleur;
+ }
 
+ 
 
 }
