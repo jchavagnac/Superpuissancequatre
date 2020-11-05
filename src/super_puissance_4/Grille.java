@@ -81,36 +81,53 @@ public boolean colonneRemplie(int indicecolonne){
         return couleur_a_retourner;
     }
 
-    public boolean etreGagnantePourJoueur(Joueur unJoueur){// on veut determiner qui est le gagnant
+public boolean etreGagnantePourJoueur(Joueur unJoueur){
         String couleurTest=unJoueur.couleur;
         for (int i=0;i<6;i++){
             for (int j=0;j<7;j++){
                 int ligne=i;
                 int colonne=j;
-
-                for (i=ligne;i<ligne+3&&i<6;i++){// pour tester les lignes 
-                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){// test si la couleur est la meme que celle dans la cellule
-                        // ligne toute la ligne
+                
+                for (i=ligne;i<ligne+4&&i<6;i++){    //Test de l'alignement de 4 jetons sur une colonne 
+                    int compteur1=0;
+                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                        compteur1++;
+                    }
+                    if (compteur1==4){
                         return true;
                     }
                 }
-
-                for (j=colonne;j<colonne+3&&j<7;j++){// pour tester les colonnes
+                
+                for (j=colonne;j<colonne+4&&j<7;j++){  //Test de l'alignement de 4 jetons sur une ligne
+                    int compteur2=0;
                     if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                        compteur2++;
+                    }
+                    if (compteur2==4){
                         return true;
                     }
-
-                for (i=ligne,j=colonne;i<ligne+3&&i<6 && j<colonne+3&&j<7;i++,j++){ // tester sur la diagonale 
+                }
+                for (i=ligne, j=colonne;i<ligne+4 && i<6 && j<colonne+4 && j<7;i++,j++){   //Test de l'alignement de 4 jetons sur une diagonale (haut droite vers bas gauche)
+                    int compteur3=0;
                     if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                        compteur3++;
+                        }
+                    if (compteur3==4){
                         return true;
-                     }
-
+                    }
+                }
+                
+                for (i=ligne, j=colonne;i<ligne-4 && i<6 && j<colonne+4 && j<7;i--,j++){  //Test de l'alignement de 4 jetons sur une diagonale (bas droite vers haut gauche)
+                    int compteur4=0;
+                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                        compteur4++;
+                         }                    
+                    if (compteur4==4){
+                        return true;
+                    }
                 } 
-                }
     }return false;
     }return false;
-    
-    
 }
 }
 
