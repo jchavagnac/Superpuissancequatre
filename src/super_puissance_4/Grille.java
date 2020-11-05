@@ -1,9 +1,5 @@
 package super_puissance_4;
 
-
-
-import java.util.Arrays;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -67,68 +63,79 @@ public boolean colonneRemplie(int indicecolonne){
             }
     }
 }
-    public void afficherGrilleSurConsole(){// afficher la grille
-        System.out.println(Arrays.toString(Cellules));
-}
+    public void afficherGrilleSurConsole(){
+        for (int i=0; i <6; i++) { //à rappeler que la ligne du haut de la grille est de coordonées i=0
+            for (int j =0;j < 7; j++){
+                if (Cellules[i][j].jetonCourant != null)
+                {
+                    System.out.print(Cellules[i][j].lirecouleurjeton());
+                }
+                else{
+                    System.out.println("O");
+            }  
+        }
+    }
+    }
+     
     public boolean celluleOccupee(int i, int j){
         return Cellules[i][j]!=null; // renvoyer la cellule
 
     }
 
     public String lireCouleurDuJeton(int i, int j){// regarder quelle est la couleur du jeton
-        String couleur_a_retourner;
-        couleur_a_retourner=Cellules[i][j].lirecouleurjeton();
-        return couleur_a_retourner;
+        return Cellules[i][j].lirecouleurjeton();
     }
 
-public boolean etreGagnantePourJoueur(Joueur unJoueur){
+ public boolean etreGagnantePourJoueur(Joueur unJoueur){
         String couleurTest=unJoueur.couleur;
         for (int i=0;i<6;i++){
             for (int j=0;j<7;j++){
                 int ligne=i;
                 int colonne=j;
-                
-                for (i=ligne;i<ligne+4&&i<6;i++){    //Test de l'alignement de 4 jetons sur une colonne 
-                    int compteur1=0;
-                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                        compteur1++;
-                    }
-                    if (compteur1==4){
-                        return true;
-                    }
-                }
-                
-                for (j=colonne;j<colonne+4&&j<7;j++){  //Test de l'alignement de 4 jetons sur une ligne
-                    int compteur2=0;
-                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                        compteur2++;
-                    }
-                    if (compteur2==4){
-                        return true;
-                    }
-                }
-                for (i=ligne, j=colonne;i<ligne+4 && i<6 && j<colonne+4 && j<7;i++,j++){   //Test de l'alignement de 4 jetons sur une diagonale (haut droite vers bas gauche)
-                    int compteur3=0;
-                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                        compteur3++;
+               
+                    for (i=ligne;i<ligne+4&&i<6;i++){    //Test de l'alignement de 4 jetons sur une colonne 
+                        int compteur1=0;
+                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                            compteur1++;
                         }
-                    if (compteur3==4){
-                        return true;
+                        if (compteur1==4){
+                            return true;
+                        }
                     }
-                }
-                
-                for (i=ligne, j=colonne;i<ligne-4 && i<6 && j<colonne+4 && j<7;i--,j++){  //Test de l'alignement de 4 jetons sur une diagonale (bas droite vers haut gauche)
-                    int compteur4=0;
-                    if (Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                        compteur4++;
-                         }                    
-                    if (compteur4==4){
-                        return true;
+
+                    for (j=colonne;j<colonne+4&&j<7;j++){  //Test de l'alignement de 4 jetons sur une ligne
+                        int compteur2=0;
+                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                            compteur2++;
+                        }
+                        if (compteur2==4){
+                            return true;
+                        }
                     }
-                } 
-    }return false;
-    }return false;
-}
+                    for (i=ligne, j=colonne;i<ligne+4 && i<6 && j<colonne+4 && j<7;i++,j++){   //Test de l'alignement de 4 jetons sur une diagonale (haut droite vers bas gauche)
+                        int compteur3=0;
+                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                            compteur3++;
+                            }
+                        if (compteur3==4){
+                            return true;
+                        }
+                    }
+
+                    for (i=ligne, j=colonne;i<ligne-4 && i<6 && j<colonne+4 && j<7;i--,j++){  //Test de l'alignement de 4 jetons sur une diagonale (bas droite vers haut gauche)
+                        int compteur4=0;
+                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
+                            compteur4++;
+                             }                    
+                        if (compteur4==4){
+                            return true;
+                        }
+                    } 
+        }
+        }return false;
+        }
+    
+
 }
 
 
