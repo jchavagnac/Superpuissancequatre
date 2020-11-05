@@ -36,7 +36,7 @@ public boolean colonneRemplie(int indicecolonne){
     
 }
     public boolean ajouterJetonDansColonne(Jeton jeton,int colonne){
-        for (int i=1;i<6;i++){
+        for (int i=1;i<7;i++){
             if (Cellules[5-i][colonne]==null){
                 Cellules[5-i][colonne].jetonCourant=jeton;
                 return true;
