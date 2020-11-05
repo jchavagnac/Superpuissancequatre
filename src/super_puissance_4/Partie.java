@@ -65,50 +65,37 @@ public class Partie {
         }
     }
 
-    public void debuterPartie() {//lance	la	partie
-        initialiserPartie();                             // initialisation de la partie, avec choix du nom des joueurs, affectation des jetons et de leur couleur.
-        this.grilleJeu.afficherGrilleSurConsole();          // affichage de la grille de jeu, vide, avec les trous et desintegrateur.
-        
-        
-        while (this.grilleJeu.etreGagnantePourJoueur() != true)  {
-            this.joueurCourant = ProchainJoueur (joueurCourant);
-            
-            System.out.println("le joueur qui joue c : " + joueurCourant.getNom()); //ici ça marche
-            
-            System.out.println("Dans quelle colonne ajouter le jeton ?");
-            
-            
-            Scanner sc = new Scanner(System.in);                 // Joueur J1 = new Joueur(sc.nextLine());
-            int a = sc.nextInt();
-            while (a>7){
-                System.out.println("Il n'y a que 7 colonnes");
-                sc = new Scanner(System.in);                 // Joueur J1 = new Joueur(sc.nextLine());
-                a = sc.nextInt();
-            }
-            boolean jetonposee;
-            jetonposee = this.grilleJeu.ajouterJetonDansColonne (this.joueurCourant.getListeJetons()[this.joueurCourant.getNombreJetonsRestant()-1] , a-1); //on a dû faire -1 ici car ça voulait pas dans la méthode en question dans la classe Grille
-            while (! jetonposee){
-                sc = new Scanner(System.in);                 // Joueur J1 = new Joueur(sc.nextLine());
-                a = sc.nextInt();
-                while (a>7){
-                    System.out.println("Il n'y a que 7 colonnes");
-                    sc = new Scanner(System.in);                 // Joueur J1 = new Joueur(sc.nextLine());
-                    a = sc.nextInt();
-                }
+ public void debuterPartie(){
+        initialiserPartie();
+        this.grilleJeu.afficherGrilleSurConsole();
+        System.out.println("Choisissez une action à effectuer");
 
-                jetonposee = this.grilleJeu.ajouterJetonDansColonne (this.joueurCourant.getListeJetons()[this.joueurCourant.getNombreJetonsRestant()-1] , a-1); //on a dû faire -1 ici car ça voulait pas dans la méthode en question dans la classe Grille
-                System.out.println(jetonposee);
+        while(grilleJeu.etreGagnantePourJoueur(joueurCourant)!=true){
+            System.out.println(joueurCourant.nom+" Dans quelle colonne voulez-vous placer votre jeton ");
+
+            Scanner sc=new Scanner(System.in);
+            int saisie =sc.nextInt()-1;
+
+            while (saisie<0 && saisie>7){
+                System.out.println("Mauvaise  saisie, il n'y a que 7 colonnes");
+                sc=new Scanner(System.in);
+                saisie=sc.nextInt();
             }
-            this.grilleJeu.afficherGrilleSurConsole();
-            
-            /* System.out.println("le joueur qui joue c : " + joueurCourant.getNom());
-            System.out.println("Deuxieme essaie");
-            a = sc.nextInt();
-            grilledejeu.ajouterJetonDansColonne (joueurCourant.listeJetons[joueurCourant.nombreJetonsRestant-1] , a-1);
-            System.out.println(joueurCourant.nombreJetonsRestant);
-            grilledejeu.afficherGrilleSurConsole();   
-            System.out.println("le joueur qui joue c : " + joueurCourant.getNom()); */
+
+            boolean jetonAposer;
+            jetonAposer=grilleJeu.ajouterJetonDansColonne(joueurCourant.listeJetons[joueurCourant.nombreJetonsRestants-1],saisie);
+
+            if (jetonAposer==true){
+                joueurCourant.nombreJetonsRestants--;
+            }
+
+
+
+
         }
+
+
+
+
     }
-}
 }
