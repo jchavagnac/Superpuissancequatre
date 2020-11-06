@@ -17,12 +17,8 @@ public class Jeton {
         couleur=uneCouleur;
     }
 
-    /**
-     *
-     * @param couleur
-     * @return
-     */
-    public String lire_Couleur(String couleur){
+    
+    public String lire_Couleur(){
         return couleur;
 }
 }

@@ -33,7 +33,7 @@ public boolean colonneRemplie(int indicecolonne){
 }
     public boolean ajouterJetonDansColonne(Jeton jeton,int colonne){
         for (int i=1;i<7;i++){
-            if (Cellules[5-i][colonne]==null){
+            if (Cellules[5-i][colonne].jetonCourant==null){
                 Cellules[5-i][colonne].jetonCourant=jeton;
                 return true;
             }
@@ -48,7 +48,7 @@ public boolean colonneRemplie(int indicecolonne){
     public boolean etreRemplie(){
         for (int i=1; i<6;i++){
             for (int j=1;j<7;j++){
-                if (Cellules[i][j]==null){
+                if (Cellules[i][j].jetonCourant==null){
                     return false;
                 }
 
@@ -59,7 +59,7 @@ public boolean colonneRemplie(int indicecolonne){
     public void viderGrille(){
         for (int i=1; i<6;i++){
             for (int j=1;j<7;j++){
-                Cellules[i][j]=null;
+                Cellules[i][j].jetonCourant=null;
             }
     }
 }
@@ -73,12 +73,13 @@ public boolean colonneRemplie(int indicecolonne){
                 else{
                     System.out.println("O");
             }  
+        System.out.println("O");        
         }
     }
     }
      
     public boolean celluleOccupee(int i, int j){
-        return Cellules[i][j]!=null; // renvoyer la cellule
+        return Cellules[i][j].jetonCourant!=null; // renvoyer la cellule
 
     }
 
@@ -86,56 +87,53 @@ public boolean colonneRemplie(int indicecolonne){
         return Cellules[i][j].lirecouleurjeton();
     }
 
- public boolean etreGagnantePourJoueur(Joueur unJoueur){
-        String couleurTest=unJoueur.couleur;
-        for (int i=0;i<6;i++){
-            for (int j=0;j<7;j++){
-                int ligne=i;
-                int colonne=j;
-               
-                    for (i=ligne;i<ligne+4&&i<6;i++){    //Test de l'alignement de 4 jetons sur une colonne 
-                        int compteur1=0;
-                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                            compteur1++;
-                        }
-                        if (compteur1==4){
-                            return true;
-                        }
-                    }
-
-                    for (j=colonne;j<colonne+4&&j<7;j++){  //Test de l'alignement de 4 jetons sur une ligne
-                        int compteur2=0;
-                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                            compteur2++;
-                        }
-                        if (compteur2==4){
-                            return true;
-                        }
-                    }
-                    for (i=ligne, j=colonne;i<ligne+4 && i<6 && j<colonne+4 && j<7;i++,j++){   //Test de l'alignement de 4 jetons sur une diagonale (haut droite vers bas gauche)
-                        int compteur3=0;
-                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                            compteur3++;
-                            }
-                        if (compteur3==4){
-                            return true;
-                        }
-                    }
-
-                    for (i=ligne, j=colonne;i<ligne-4 && i<6 && j<colonne+4 && j<7;i--,j++){  //Test de l'alignement de 4 jetons sur une diagonale (bas droite vers haut gauche)
-                        int compteur4=0;
-                        if (Cellules[i][j]!=null && Cellules[i][j].lirecouleurjeton().equals(couleurTest)){
-                            compteur4++;
-                             }                    
-                        if (compteur4==4){
-                            return true;
-                        }
-                    } 
+ public  boolean etreGagnantePourJoueur(Joueur joueur) {
+     //Je teste donc l'existence d'une ligne pour tout jeton A compris dans la zone verte de la figure ci-dessous, 
+     //avec 2 boucles imbriquées. Si j'en trouve au moins 1, je retourne vrai de suite. 
+     //Sinon je ne retourne rien et continue jusqu'à couvrir entièrement la zone verte. Si je ne trouve rien je retourne faux.
+     //Ensuite on le fait avec les colonnes et les diagonales.
+       for (int i = 0; i < 6; i++) {// test ligne
+            for (int j = 0; j < 4; j++) {
+                if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
+                       && Cellules[i][j + 1]!= null && Cellules[i][j + 1].lirecouleurjeton().equals(joueur.couleur)
+                        && Cellules[i][j + 2]!= null && Cellules[i][j + 2].lirecouleurjeton().equals(joueur.couleur)
+                        && Cellules[i][j + 3]!= null && Cellules[i][j + 3].lirecouleurjeton().equals(joueur.couleur)) {
+                    return true;
+                }
+            }
         }
-        }return false;
+        for (int j = 0; j < 7; j++) {// test colonne
+            for (int i = 0; i < 3; i++) {
+                if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
+                       &&Cellules[i + 1][j]!= null&& Cellules[i + 1][j].lirecouleurjeton().equals(joueur.couleur)
+                        &&Cellules[i + 2][j]!= null&& Cellules[i + 2][j].lirecouleurjeton().equals(joueur.couleur)
+                       &&Cellules[i + 3][j]!= null&& Cellules[i + 3][j].lirecouleurjeton().equals(joueur.couleur)) {
+                    return true;
+                }
+            }
         }
-    
-
+        for (int i = 0; i < 3; i++) {// test diagonale 1
+            for (int j = 0; j < 4; j++) {
+                if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
+                       &&Cellules[i + 1][j + 1]!= null && Cellules[i + 1][j + 1].lirecouleurjeton().equals(joueur.couleur)
+                      &&Cellules[i + 2][j + 2]!= null && Cellules[i + 2][j + 2].lirecouleurjeton().equals(joueur.couleur)
+                        &&Cellules[i + 3][j + 3]!= null && Cellules[i + 3][j + 3].lirecouleurjeton().equals(joueur.couleur)) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 3; i < 6; i++) { //test diagonale 2
+            for (int j = 0; j < 4; j++) {
+                if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
+                       && Cellules[i - 1][j + 1]!= null && Cellules[i - 1][j + 1].lirecouleurjeton().equals(joueur.couleur)
+                        && Cellules[i - 2][j + 2]!=null && Cellules[i - 2][j + 2].lirecouleurjeton().equals(joueur.couleur)
+                      && Cellules[i - 3][j + 3]!= null && Cellules[i - 3][j + 3].lirecouleurjeton().equals(joueur.couleur)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+ }
 }
 
 

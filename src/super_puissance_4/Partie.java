@@ -64,37 +64,53 @@ public class Partie {
             joueurCourant=listeJoueurs[1];
         }
     }
+    public Joueur prochainJoueur(Joueur un_joueur) {
+        if (listeJoueurs[0] == joueurCourant) {
+            return listeJoueurs[1];
+        }
+        return listeJoueurs[0];
+    }
+    public void tourDeJeu(){
+        while(grilleJeu.etreGagnantePourJoueur(joueurCourant)!=true && grilleJeu.etreRemplie()!=true){
+                System.out.println(joueurCourant.nom+" Choisissez dans quelles colonne vous souhaittez placer un jeton");
 
+                Scanner sc=new Scanner(System.in);
+                int saisie =sc.nextInt();
+
+                while (saisie<0&&saisie>7){
+                    System.out.println("Mauvaise  saisie, saisissez un numéro de colonne valide");
+                    sc=new Scanner(System.in);
+                    saisie=sc.nextInt();
+                }
+
+                if (joueurCourant.nombreJetonsRestants>0){
+                    boolean jetonAposer;
+                    jetonAposer=grilleJeu.ajouterJetonDansColonne(joueurCourant.listeJetons[joueurCourant.nombreJetonsRestants-1],saisie-1);
+
+                    if (jetonAposer==true){
+                        joueurCourant.nombreJetonsRestants--;                
+                    }
+                    else{
+                        System.out.println("Cette colonne est remplie, veuillez saisir un autre numéro de colonne");
+                        tourDeJeu();
+                    }
+                }joueurCourant=prochainJoueur(joueurCourant);
+
+        }
+    }
+     
  public void debuterPartie(){
         initialiserPartie();
         this.grilleJeu.afficherGrilleSurConsole();
         System.out.println("Choisissez une action à effectuer");
-
-        while(grilleJeu.etreGagnantePourJoueur(joueurCourant)!=true){
-            System.out.println(joueurCourant.nom+" Dans quelle colonne voulez-vous placer votre jeton ");
-
-            Scanner sc=new Scanner(System.in);
-            int saisie =sc.nextInt()-1;
-
-            while (saisie<0 && saisie>7){
-                System.out.println("Mauvaise  saisie, il n'y a que 7 colonnes");
-                sc=new Scanner(System.in);
-                saisie=sc.nextInt();
-            }
-
-            boolean jetonAposer;
-            jetonAposer=grilleJeu.ajouterJetonDansColonne(joueurCourant.listeJetons[joueurCourant.nombreJetonsRestants-1],saisie);
-
-            if (jetonAposer==true){
-                joueurCourant.nombreJetonsRestants--;
-            }
-
-
-
-
+        tourDeJeu();
+        if (grilleJeu.etreGagnantePourJoueur(joueurCourant)==true){
+            System.out.println("Le joueur "+joueurCourant.nom+" a gagné" );
         }
 
-
+        if (grilleJeu.etreRemplie()==true && grilleJeu.etreGagnantePourJoueur(joueurCourant)!=true){
+            System.out.println("La grille est pleine, personne n'a gagné");
+ }
 
 
     }
