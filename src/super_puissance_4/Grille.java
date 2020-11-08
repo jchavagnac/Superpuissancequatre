@@ -28,11 +28,11 @@ public class Grille {
     }
 public boolean colonneRemplie(int indicecolonne){
     
-    return (Cellules[5][indicecolonne].recupererJeton() != null);
+    return (Cellules[5][indicecolonne].recupererJeton() != null);// recuperer le jeton si la colonne est remplie
     
 }
     
-    public boolean etreRemplie(){
+    public boolean etreRemplie(){// si la grille est remplie il faut le verifier
         for (int i=1; i<6;i++){
             for (int j=1;j<7;j++){
                 if (Cellules[i][j].jetonCourant==null){
@@ -46,29 +46,29 @@ public boolean colonneRemplie(int indicecolonne){
     public void viderGrille(){
         for (int i=1; i<6;i++){
             for (int j=1;j<7;j++){
-                Cellules[i][j].jetonCourant=null;
+                Cellules[i][j].jetonCourant=null;// vider la grille avant chaque partie
             }
     }
 }
-   public void afficherGrilleSurConsole(){
+   public void afficherGrilleSurConsole(){// affichage
         for (int i=0; i <6; i++) { 
             for (int j =0;j < 7; j++){
                 if (Cellules[i][j].jetonCourant != null) {                   
                     System.out.print(Cellules[i][j].jetonCourant);
                 }
                 else if(Cellules[i][j].desintegrateur==true){
-                    System.out.print("\u001B[0m D ");
+                    System.out.print("\u001B[0m D ");// D pour desintegrateurs
                 }
                 else{
-                    System.out.print("\u001B[0m N ");
+                    System.out.print("\u001B[0m N ");// N pour rien 
             }  
-        }System.out.println();
+        }System.out.println();// afficher le tout
     }
     }
     public boolean ajouterJetonDansColonne(Joueur joueurCourant,Jeton jeton,int colonne){
             for (int i=1;i<7;i++){   
                 if (Cellules[6-i][colonne].jetonCourant==null){
-                    if (Cellules[6-i][colonne].presenceDesintegrateur()) {
+                    if (Cellules[6-i][colonne].presenceDesintegrateur()) {// si il ya un desintegrateur il faut l'ajouter dans les possessions du joueur
                         Cellules[6-i][colonne].recupererDesintegrateur();
                         joueurCourant.nombreDesintegrateurs++;
                     }
@@ -82,7 +82,7 @@ public boolean colonneRemplie(int indicecolonne){
             }
 
     public boolean celluleOccupee(int i, int j){
-        return Cellules[i][j].jetonCourant!=null; // renvoyer la cellule
+        return Cellules[i][j].jetonCourant!=null; // renvoyer la cellule occupée
 
     }
 
@@ -95,6 +95,7 @@ public boolean colonneRemplie(int indicecolonne){
      //avec 2 boucles imbriquées. Si j'en trouve au moins 1, je retourne vrai de suite. 
      //Sinon je ne retourne rien et continue jusqu'à couvrir entièrement la zone verte. Si je ne trouve rien je retourne faux.
      //Ensuite on le fait avec les colonnes et les diagonales.
+     // l'annexe nous a aidée
        for (int i = 0; i < 6; i++) {// test ligne
             for (int j = 0; j < 4; j++) {
                 if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
@@ -108,7 +109,7 @@ public boolean colonneRemplie(int indicecolonne){
         for (int j = 0; j < 7; j++) {// test colonne
             for (int i = 0; i < 3; i++) {
                 if (Cellules[i][j] != null && Cellules[i][j].lirecouleurjeton().equals(joueur.couleur)
-                       &&Cellules[i + 1][j]!= null&& Cellules[i + 1][j].lirecouleurjeton().equals(joueur.couleur)
+                      &&Cellules[i + 1][j]!= null&& Cellules[i + 1][j].lirecouleurjeton().equals(joueur.couleur)
                         &&Cellules[i + 2][j]!= null&& Cellules[i + 2][j].lirecouleurjeton().equals(joueur.couleur)
                        &&Cellules[i + 3][j]!= null&& Cellules[i + 3][j].lirecouleurjeton().equals(joueur.couleur)) {
                     return true;
@@ -150,7 +151,7 @@ public boolean colonneRemplie(int indicecolonne){
     
     public boolean placerDesintegrateur(int ligne,int colonne){
         if (Cellules[ligne][colonne].desintegrateur==true){
-            return false;            
+            return false;            // on place les desintegrateurs 
         }
         else{
             Cellules[ligne][colonne].desintegrateur=true;
@@ -160,7 +161,7 @@ public boolean colonneRemplie(int indicecolonne){
     
     public Jeton recupererJeton(int ligne, int colonne){
         Jeton unJeton=Cellules[ligne][colonne].recupererJeton();
-        return unJeton;
+        return unJeton;// si on a un jeton supprimé il faudra le recuperer 
     }
 
 }
