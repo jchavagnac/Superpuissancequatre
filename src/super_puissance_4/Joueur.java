@@ -24,7 +24,7 @@ public class Joueur {
         couleur=uneCouleur;
     }
 
-    public void ajouter_jeton(Jeton jeton){
+    public void ajouter_jeton(Jeton jeton){// on ajoute des jetons
          for (int i=0;i<listeJetons.length;i++)
             if (listeJetons[i]==null){
                 listeJetons[i]=jeton;
