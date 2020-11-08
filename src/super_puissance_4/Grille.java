@@ -31,20 +31,7 @@ public boolean colonneRemplie(int indicecolonne){
     return (Cellules[5][indicecolonne].recupererJeton() != null);
     
 }
-    public boolean ajouterJetonDansColonne(Jeton jeton,int colonne){
-        for (int i=1;i<7;i++){
-            if (Cellules[5-i][colonne].jetonCourant==null){
-                Cellules[5-i][colonne].jetonCourant=jeton;
-                return true;
-            }
-            if (i==5){
-                return false;
-            }
-
-        }
-        return false;
-    }
-
+    
     public boolean etreRemplie(){
         for (int i=1; i<6;i++){
             for (int j=1;j<7;j++){
@@ -63,19 +50,30 @@ public boolean colonneRemplie(int indicecolonne){
             }
     }
 }
-    public void afficherGrilleSurConsole(){
-        for (int i=0; i <6; i++) { //à rappeler que la ligne du haut de la grille est de coordonées i=0
+   public void afficherGrilleSurConsole(){
+        for (int i=0; i <6; i++) { 
             for (int j =0;j < 7; j++){
-                if (Cellules[i][j].jetonCourant != null)
-                {
-                    System.out.print(Cellules[i][j].lirecouleurjeton());
+                if (Cellules[i][j].jetonCourant != null) {
+                    System.out.print(Cellules[i][j].jetonCourant);
                 }
                 else{
-                    System.out.println("O");
-            }  
-        System.out.println("O");        
-        }
+                    System.out.print("\u001B[0m N ");
+            }
+        }System.out.println();
     }
+    }
+public boolean ajouterJetonDansColonne(Jeton jeton,int colonne){
+        for (int i=1;i<6;i++){
+            if (Cellules[6-i][colonne].jetonCourant==null){
+                Cellules[6-i][colonne].jetonCourant=jeton;
+                return true;
+            }
+            if (i==5){
+                return false;
+            }
+
+        }
+        return false;
     }
      
     public boolean celluleOccupee(int i, int j){
