@@ -21,4 +21,11 @@ public class Jeton {
     public String lire_Couleur(){
         return couleur;
 }
+    @Override
+    public String toString(){// les couleurs des joueurs 
+        if("Rouge".equals(couleur))// rouge pour le joueur 2
+            return "\u001B[31m O "; // jaune pour le j1
+        return "\u001B[33m O ";
+    }
+
 }

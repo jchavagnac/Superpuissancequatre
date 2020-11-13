@@ -24,11 +24,24 @@ public class Joueur {
         couleur=uneCouleur;
     }
 
-    public void ajouter_jeton(Jeton jeton){// on ajoute des jetons
+    public void ajouter_jeton(Jeton jeton){// on ajoute les 21 jetons aux joueurs
          for (int i=0;i<listeJetons.length;i++)
             if (listeJetons[i]==null){
                 listeJetons[i]=jeton;
                 break;
             }
             }
+public void obtenirDesintegrateur(){
+        nombreDesintegrateurs++;
 }
+    public boolean utiliserDesintegrateur(){// enlever un desintegrateur a chaque utilisition
+        if (nombreDesintegrateurs<1){
+            return false;
+        }
+        else{
+            nombreDesintegrateurs--;
+            return true;
+        }
+    }
+}
+                 
