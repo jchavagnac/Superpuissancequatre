@@ -17,7 +17,7 @@ public class Super_puissance_4 {
     public static void main(String[] args) {
         System.out.println("Bienvenue dans le jeu Super Puissance 4 !");// petit mot de debut de jeu
         Partie premierePartie=new Partie(); // création de partie
-        premierePartie.debuterPartie();// début de partie
+        premierePartie.debuterPartie();// début de partie jai changé
         // TODO code application logic here
     }
     
